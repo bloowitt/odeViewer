@@ -1,0 +1,65 @@
+body {
+	background:#77F;
+}
+
+#viewerContainer{
+	width:800px;
+	height:600px;
+	background:#BBB;
+	margin: 0 auto;
+}
+
+#OVpieceSelect{
+	width:100%;
+	height:20%;
+	 -webkit-box-shadow:inset 0px 0px 0px 1px #DDD;
+    -moz-box-shadow:inset 0px 0px 0px 1px #DDD;
+}
+
+#OVviewSelect{
+	width:25%;
+	float:right;
+	height:80%;
+	 -webkit-box-shadow:inset 0px 0px 0px 1px #DDD;
+    -moz-box-shadow:inset 0px 0px 0px 1px #DDD;
+}
+
+#OVview{
+	width:75%;
+	float:left;
+	height:80%;
+	 -webkit-box-shadow:inset 0px 0px 0px 1px #DDD;
+    -moz-box-shadow:inset 0px 0px 0px 1px #DDD;
+    box-shadow:inset 0px 0px 0px 1px #DDD;
+}
+
+.leftArrow, .rightArrow{
+	margin-top:3px;
+	margin-bottom:auto;
+	height: 95%;
+	width:10%;
+	font-size:50;
+	text-shadow: -1px -1px black, 1px 1px white;
+	color:#BBB;
+}
+
+.leftArrow{
+	float:left;
+	
+}
+.rightArrow{
+	float:right;
+}
+
+.pieceSelectionBox{
+
+	margin-bottom:auto;
+	width:15%;
+	margin:3px 0.5% auto 0.5%;
+	height:95%;
+	background:#000;
+	 -webkit-box-shadow:inset 0px 0px 0px 1px #DDD;
+    -moz-box-shadow:inset 0px 0px 0px 1px #DDD;
+    box-shadow:inset 0px 0px 0px 1px #DDD;
+	float:left;
+}
