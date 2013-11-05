@@ -41,6 +41,7 @@ body {
 	font-size:50;
 	text-shadow: -1px -1px black, 1px 1px white;
 	color:#BBB;
+	cursor: pointer;
 }
 
 .leftArrow{
@@ -79,4 +80,5 @@ display:block
     -moz-box-shadow:inset 0px 0px 0px 1px #DDD;
     box-shadow:inset 0px 0px 0px 1px #DDD;
 	float:left;
+	cursor: pointer;
 }

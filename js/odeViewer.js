@@ -59,7 +59,7 @@ function odeViewer(){
 		
 	};
 	
-	this.restart3DView() = {
+	this.restart3DView = function(){
 		
 	};
 };
