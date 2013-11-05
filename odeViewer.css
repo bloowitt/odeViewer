@@ -52,12 +52,29 @@ body {
 }
 
 .pieceSelectionBox{
-
+display:block
 	margin-bottom:auto;
 	width:15%;
 	margin:3px 0.5% auto 0.5%;
 	height:95%;
 	background:#000;
+	 -webkit-box-shadow:inset 0px 0px 0px 1px #DDD;
+    -moz-box-shadow:inset 0px 0px 0px 1px #DDD;
+    box-shadow:inset 0px 0px 0px 1px #DDD;
+	float:left;
+}
+
+.pieceSelectionBox img{
+	
+}
+
+.pieceSelectionBox:hover{
+
+	margin-bottom:auto;
+	width:15%;
+	margin:3px 0.5% auto 0.5%;
+	height:95%;
+	background:#FFF;
 	 -webkit-box-shadow:inset 0px 0px 0px 1px #DDD;
     -moz-box-shadow:inset 0px 0px 0px 1px #DDD;
     box-shadow:inset 0px 0px 0px 1px #DDD;

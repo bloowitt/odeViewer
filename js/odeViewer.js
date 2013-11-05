@@ -1,8 +1,8 @@
 var mOdeViewer;
 
-function odeViewer(pParentDiv){
+function odeViewer(){
 	var pThis = this;
-	this.parentDiv = pParentDiv;
+	this.parentDiv = "";
 	this.pieceSelectionPanel = $("<div id='OVpieceSelect'></div>");
 	this.viewSelectionPanel = $("<div id='OVviewSelect'></div>");
 	this.viewPanel = $("<canvas id='OVview'></canvas>")
@@ -10,40 +10,63 @@ function odeViewer(pParentDiv){
 	this.currentView = 0;
 	this.pieceData = new Array();
 	
-	this.start = function(){
+	this.start = function(pParentDiv){
+		this.parentDiv = pParentDiv;
 		this.parentDiv.html("");
-		this.loadPieceData();
 		this.populatePieceSelectionPanel();
 		this.populateViewSelectionPanel();
 		this.parentDiv.append(this.pieceSelectionPanel);
 		this.parentDiv.append(this.viewPanel);
 		this.parentDiv.append(this.viewSelectionPanel);
+		this.restart3DView();
 	}
 	
-	this.loadPieceData = function(){
-		this.pieceData = [{},{},{}]
+	this.addPiece = function(piece){
+		this.pieceData.push(piece);
+	};
+	
+	this.emptyPieces = function(){
+		this.pieceData = new Array();
 	};
 	
 	this.populatePieceSelectionPanel = function(){
 		this.pieceSelectionPanel.html("");
-		this.pieceSelectionPanel.append($("<button class='leftArrow' onclick='mOdeViewer.pieceSelectorGoLeft()'> <</button>"));
-		this.pieceSelectionPanel.append($("<button class='rightArrow' onclick='mOdeViewer.pieceSelectorGoRight()'>> </button>"));
-		var pieceNumberToShow = Math.min(5,this.pieceData.length);
+		this.pieceSelectionPanel.append($("<button class='leftArrow' onclick='mOdeViewer.changeCurPiece(-1)'> <</button>"));
+		this.pieceSelectionPanel.append($("<button class='rightArrow' onclick='mOdeViewer.changeCurPiece(+1)'>> </button>"));
+		for (var i = -2; i<3 ; i++){
 		var boxArray = Array();
-		for (var i = 0; i<5 ; i++){
-			this.pieceSelectionPanel.append($("<div class='pieceSelectionBox'></div>"));
+			var myData = this.currentPiece+i ;
+			var boxId = 'pieceSelectionBox' + i;
+			this.pieceSelectionPanel.append($("<a class='pieceSelectionBox' id=" 
+			+ boxId + "onclick='mOdeViewer.changeCurPiece(" + i +")' >" + myData
+			+ "</a>"));
+			
 		}
+			
 	};
 	
 	this.populateViewSelectionPanel= function(){
 		
 	};
 	
-	this.pieceSelectorGoRight = function(){;};
-	this.pieceSelectorGoLeft = function(){;};
+	this.changeCurPiece = function(howMuch){
+		this.currentPiece = (this.currentPiece + howMuch)
+		% this.pieceData.length;
+		if (this.currentPiece < 0)
+			this.currentPiece = this.pieceData.length + this.currentPiece;
+		
+		this.populatePieceSelectionPanel();
+		
+	};
+	
+	this.restart3DView() = {
+		
+	};
 };
 
-function startOdeViewer(){
-	mOdeViewer = new odeViewer($("#viewerContainer"));
-	mOdeViewer.start();
-	};
+mOdeViewer = new odeViewer();
+
+function startOdeViewer(container){
+	
+	mOdeViewer.start(container);
+};

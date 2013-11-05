@@ -1,0 +1,145 @@
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>hlaw</author>
+      <authoring_tool>Maya2008 | ColladaMaya v3.05B</authoring_tool>
+      <copyright>
+        Copyright 2008 Sony Computer Entertainment Inc.
+        Licensed under the Creative Commons Attribution Noncommercial Share Alike license.
+        See license file or www.creativecommons.org for details.
+      </copyright>
+    </contributor>
+    <contributor>
+      <authoring_tool>meshtool</authoring_tool>
+      <comments>Retextured and simplified base mesh using Texture Mapping Progressive Meshes, Sander et al.</comments>
+    </contributor>
+    <created>2012-07-26T17:07:19.232751</created>
+    <modified>2012-07-26T17:07:19.232756</modified>
+    <up_axis>Y_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect name="sander-simplify-effect" id="sander-simplify-effect">
+      <profile_COMMON>
+        <newparam sid="sander-simplify-surface">
+          <surface type="2D">
+            <init_from>sander-simplify-packed-atlas</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="sander-simplify-sampler">
+          <sampler2D>
+            <source>sander-simplify-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <blinn>
+            <emission>
+              <color>0.0 0.0 0.0 1.0</color>
+            </emission>
+            <ambient>
+              <color>0.0 0.0 0.0 1.0</color>
+            </ambient>
+            <diffuse>
+              <texture texcoord="TEX0" texture="sander-simplify-sampler"/>
+            </diffuse>
+            <specular>
+              <color>0.0 0.0 0.0 1.0</color>
+            </specular>
+            <shininess>
+              <float>0.0</float>
+            </shininess>
+            <reflective>
+              <color>0.0 0.0 0.0 1.0</color>
+            </reflective>
+            <reflectivity>
+              <float>0.0</float>
+            </reflectivity>
+            <transparent>
+              <color>0.0 0.0 0.0 1.0</color>
+            </transparent>
+            <transparency>
+              <float>1.0</float>
+            </transparency>
+          </blinn>
+        </technique>
+        <extra>
+          <technique profile="GOOGLEEARTH">
+            <double_sided>0</double_sided>
+          </technique>
+        </extra>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="sander-geometry-0" name="sander-mesh">
+      <mesh>
+        <source id="sander-normals-array">
+          <float_array count="18" id="sander-normals-array-array">-1 0 0 0 -1 0 0 0 -1 0 0 1 0 1 0 1 0 0</float_array>
+          <technique_common>
+            <accessor count="6" source="#sander-normals-array-array" stride="3">
+              <param type="float" name="X"/>
+              <param type="float" name="Y"/>
+              <param type="float" name="Z"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="sander-uv-array">
+          <float_array count="72" id="sander-uv-array-array">0.00390625 0.002929688 0.00390625 0.3310152 0.00390625 0.5029297 0.00390625 0.8779297 0.08738193 0.2480469 0.08738193 0.7480469 0.1606649 0.4980469 0.2441406 0.08101521 0.2441406 0.2529297 0.2441406 0.5810152 0.2490234 0.9980469 0.2539062 0.002929688 0.2539062 0.3310152 0.2539062 0.5810152 0.3373819 0.2480469 0.4106649 0.4980469 0.4106649 0.7480469 0.4941406 0.8779297 0.4941406 0.08101521 0.4941406 0.2529297 0.4941406 0.5029297 0.5039062 0.3779297 0.5039062 0.5029297 0.5039062 0.6279297 0.5039062 0.7529297 0.5039062 0.8779297 0.7490234 0.4980469 0.7490234 0.6230469 0.7490234 0.7480469 0.7490234 0.8730469 0.7490234 0.9980469 0.9941406 0.3779297 0.9941406 0.5029297 0.9941406 0.6279297 0.9941406 0.7529297 0.9941406 0.8779297</float_array>
+          <technique_common>
+            <accessor count="36" source="#sander-uv-array-array" stride="2">
+              <param type="float" name="S"/>
+              <param type="float" name="T"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="sander-verts-array">
+          <float_array count="24" id="sander-verts-array-array">0 0 0 0 0 1000 0 1000 0 0 1000 1000 1000 0 0 1000 0 1000 1000 1000 0 1000 1000 1000</float_array>
+          <technique_common>
+            <accessor count="8" source="#sander-verts-array-array" stride="3">
+              <param type="float" name="X"/>
+              <param type="float" name="Y"/>
+              <param type="float" name="Z"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="sander-verts-array-vertices">
+          <input source="#sander-verts-array" semantic="POSITION"/>
+        </vertices>
+        <triangles count="12" material="materialref">
+          <input source="#sander-normals-array" semantic="NORMAL" offset="1"/>
+          <input source="#sander-verts-array-vertices" semantic="VERTEX" offset="0"/>
+          <input source="#sander-uv-array" semantic="TEXCOORD" offset="2"/>
+          <p>1 3 10 5 3 17 7 3 3 1 3 30 7 3 25 3 3 35 3 4 5 7 4 2 6 4 9 3 4 8 6 4 1 2 4 6 2 2 4 6 2 0 4 2 7 2 2 20 4 2 13 0 2 16 0 1 29 4 1 34 5 1 24 0 1 28 5 1 23 1 1 33 5 5 19 4 5 15 6 5 12 5 5 14 6 5 18 7 5 11 0 0 27 1 0 32 3 0 22 0 0 26 3 0 21 2 0 31</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_images>
+    <image name="sander-simplify-packed-atlas" id="sander-simplify-packed-atlas">
+      <init_from>./atlas.jpg</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material name="sander-simplify-material" id="sander-simplify-material0">
+      <instance_effect url="#sander-simplify-effect"/>
+    </material>
+  </library_materials>
+  <library_visual_scenes>
+    <visual_scene id="myscene">
+      <node name="node0" id="node0">
+        <instance_geometry url="#sander-geometry-0">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="materialref" target="#sander-simplify-material0">
+                <bind_vertex_input input_semantic="TEXCOORD" input_set="0" semantic="TEX0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#myscene"/>
+  </scene>
+</COLLADA>
