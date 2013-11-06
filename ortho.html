@@ -40,15 +40,15 @@
 				container.appendChild( info );
 
 				camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, - 500, 1000 );
-				camera.position.x = 200;
-				camera.position.y = 200;
-				camera.position.z = 200;
-
+				camera.position.x = 100;
+				camera.position.y = 100;
+				camera.position.z = 100;
+				camera.lookAt(0,30,0);
 				scene = new THREE.Scene();
 
 				// Grid
 
-				/*var size = 500, step = 50;
+				var size = 500, step = 10;
 
 				var geometry = new THREE.Geometry();
 
@@ -67,29 +67,29 @@
 				var line = new THREE.Line( geometry, material );
 				line.type = THREE.LinePieces;
 				scene.add( line );
-				*/
+				/**/
 				// Cubes
 
 				var material = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, shading: THREE.FlatShading, overdraw: 0.5 } );
 				var vertexMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, shading: THREE.FlatShading, wireframe: true, transparent: true } );
 				
 				var materials = [material, vertexMaterial];
-				var geometry = new THREE.CubeGeometry( 50, 50, 50 );
+				var geometry = new THREE.CubeGeometry( 120, 120, 120 );
 				
 				var cube = THREE.SceneUtils.createMultiMaterialObject( geometry, materials );
 				
-				cube.position.x = 0;
-				cube.position.y = 25;
-				cube.position.z = 0;
+				cube.position.x = 60;
+				cube.position.y = 60;
+				cube.position.z = -60;
 				
 				scene.add(cube);
 				// Lights
 
-				var ambientLight = new THREE.AmbientLight( 0x111111 );
+				var ambientLight = new THREE.AmbientLight( 0x111144	 );
 				scene.add( ambientLight );
 
 				
-				var directionalLight = new THREE.DirectionalLight( 0xffffff );
+				var directionalLight = new THREE.DirectionalLight( 0xffffDD );
 				directionalLight.position.x = -200;
 				directionalLight.position.y = 400;
 				directionalLight.position.z = 200;
@@ -111,8 +111,8 @@
 
 				controls.noZoom = false;
 				controls.noPan = true;
-
-				controls.staticMoving = false;
+				
+				controls.staticMoving = true;
 				controls.dynamicDampingFactor = 0.3;
 
 				controls.keys = [];
@@ -122,32 +122,33 @@
 
 			function onKeyDown ( event ) {
 			
-				camera.rotation = new THREE.Vector3(0,0,0);
+				controls.reset();
 				switch( event.keyCode ) {
 	
 					case 49: /*1*/
 						camera.position.x = 0;
-						camera.position.y = 300;
+						camera.position.y = 150;
 						camera.position.z = 0;
 						break;
 					case 50: /*2*/
 						camera.position.x = 0;
-						camera.position.y = 25;
-						camera.position.z = -300;
+						camera.position.y = 0;
+						camera.position.z = -150;
 						break;
 					case 51: /*3*/
-						camera.position.x = -300;
-						camera.position.y = 25;
+						camera.position.x = -150;
+						camera.position.y = 0;
 						camera.position.z = 0;
 						break;
 					case 52: /*4*/
-						camera.position.x = 400;
-						camera.position.y = 400;
-						camera.position.z = 400;
+						camera.position.x = 100;
+						camera.position.y = 100;
+						camera.position.z = 100;
 						break;
 				}
-				camera.position.normalize();
-				camera.lookAt( scene.position );
+				//camera.position.normalize();
+				//camera.lookAt(new THREE.Vector3(0,25,0));
+				//controls.target(new THREE.Vector3(0,25,0));
 				render();
 			};
 			
@@ -179,10 +180,9 @@
 
 			function render() {
 
-				var timer = Date.now() * 0.0001;
 				
-				camera.lookAt( scene.position );
-
+				//camera.lookAt(new THREE.Vector3(0,25,0));
+				//controls.target(new THREE.Vector3(0,25,0));
 				renderer.render( scene, camera );
 
 			}
