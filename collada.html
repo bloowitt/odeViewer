@@ -51,17 +51,17 @@
 
 			var loader = new THREE.ColladaLoader();
 			loader.options.convertUpAxis = true;
-			var colData = loader.loadFromString( colladaXml,
+			var colData = loader.load( 'objects/02.dae',
 			function ( collada ) {
 
 				dae = collada.scene;
-				skin = collada.skins[ 0 ];
+				//skin = collada.skins[ 0 ];
 
-				dae.scale.x = dae.scale.y = dae.scale.z = 0.002;
-				dae.updateMatrix();
+				//dae.scale.x = dae.scale.y = dae.scale.z = 0.002;
+				//dae.updateMatrix();
 
 				init();
-				//animate();
+				animate();
 
 			} );
 
