@@ -62,7 +62,7 @@ function odeViewer(){
 	};
 	
 	this.restart3DView = function(){
-		
+		mRenderManager.loadPiece(this.pieceData[this.currentPiece].colladaXml);
 	};
 };
 
