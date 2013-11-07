@@ -35,25 +35,27 @@ function odeViewer(){
 		this.pieceSelectionPanel.append($("<button class='rightArrow' onclick='mOdeViewer.changeCurPiece(+1)'>> </button>"));
 		for (var i = -2; i<3 ; i++){
 		var boxArray = Array();
-			var myData = this.currentPiece+i ;
+			var myData = (this.pieceData.length+this.currentPiece+i) % this.pieceData.length ;
 			var boxId = 'pieceSelectionBox' + i;
 			this.pieceSelectionPanel.append($("<a class='pieceSelectionBox' id=" 
-			+ boxId + "onclick='mOdeViewer.changeCurPiece(" + i +")' >" + myData
-			+ "</a>"));
+			+ boxId + " onclick='mOdeViewer.changeCurPiece(" + myData +")' >" 
+			+ "<img class='pieceSelectorBackground' src='" 
+			+ this.pieceData[myData].previewImg 
+			+"'/>" + "<span class='pieceSelectorText'>"
+			+ myData + "</span>" 		
+			+ "</a>" + myData));
 			
 		}
 			
 	};
 	
 	this.populateViewSelectionPanel= function(){
-		
+		this.viewSelectionPanel.html("");
+		this.viewSelectionPanel.append("Pulsa las teclas del 1 al 4 para elegir vista. Rota la vista libremente con el ratón");
 	};
 	
-	this.changeCurPiece = function(howMuch){
-		this.currentPiece = (this.currentPiece + howMuch)
-		% this.pieceData.length;
-		if (this.currentPiece < 0)
-			this.currentPiece = this.pieceData.length + this.currentPiece;
+	this.changeCurPiece = function(id){
+		this.currentPiece = id;
 		
 		this.populatePieceSelectionPanel();
 		

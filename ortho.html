@@ -18,13 +18,27 @@
 		<script type="text/javascript" src="js/three.min.js"></script>
 
 		<script type="text/javascript" src="js/OrbitControls.js"></script>
+		<script type="text/javascript" src="js/loaders/ColladaLoader.js"></script>
 		<script type="text/javascript" >
 
 			var container;
-			var camera, controls, scene, renderer;
+			var camera, controls, scene, renderer, objects, dae;
 
-			init();
-			animate();
+			var loader = new THREE.ColladaLoader();
+			loader.options.convertUpAxis = true;
+			var colData = loader.load( 'objects/07.dae',
+			function ( collada ) {
+
+				dae = collada.scene;
+				//skin = collada.skins[ 0 ];
+
+				//dae.scale.set(120,120,120);
+				//dae.updateMatrix();
+
+				init();
+				animate();
+
+			} );
 
 			function init() {
 
@@ -39,16 +53,16 @@
 				info.innerHTML = 'Cambios de vista - 1,2,3,4';
 				container.appendChild( info );
 
-				camera = new THREE.OrthographicCamera( window.innerWidth / - 3, window.innerWidth / 3, window.innerHeight / 3, window.innerHeight / - 3, -500, 1000 );
+				camera = new THREE.OrthographicCamera( window.innerWidth / - 200, window.innerWidth / 200, window.innerHeight / 200, window.innerHeight / - 200, -500, 1000 );
 				camera.position.x = 100;
 				camera.position.y = 100;
 				camera.position.z = 100;
-				camera.lookAt(0,60,0);
+				camera.lookAt(0,0.5,0);
 				scene = new THREE.Scene();
 
 				// Grid
 
-				var size = 480, step = 20;
+				var size = 15, step = 1;
 
 				var geometry = new THREE.Geometry();
 
@@ -70,70 +84,59 @@
 				/**/
 				// Object
 				
-				var material = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, shading: THREE.FlatShading, overdraw: 0.5, opacity:1 } );
 				
-				var geometry = new THREE.CubeGeometry( 40, 120, 120 );
+				scene.add(dae);
 				
-				var trianguloDch = new THREE.Geometry();
-				trianguloDch.vertices.push(new THREE.Vertex(new THREE.Vector3(60,120,60)));
-				trianguloDch.vertices.push(new THREE.Vertex(new THREE.Vector3(60,60,-60)));
-				trianguloDch.vertices.push(new THREE.Vertex(new THREE.Vector3(60,0,60)));
-				trianguloDch.vertices.push(new THREE.Vertex(new THREE.Vector3(20,120,60)));
-				trianguloDch.vertices.push(new THREE.Vertex(new THREE.Vector3(20,60,-60)));
-				trianguloDch.vertices.push(new THREE.Vertex(new THREE.Vector3(20,0,60)));
-				
-				trianguloDch.faces.push(new THREE.Face3(0,1,2));
-				trianguloDch.faces.push(new THREE.Face3(0,3,2));
-				trianguloDch.faces.push(new THREE.Face3(3,5,2));trianguloDch.faces.push(new THREE.Face3(3,4,1));
-				trianguloDch.faces.push(new THREE.Face3(3,0,1));trianguloDch.faces.push(new THREE.Face3(4,5,2));
-				trianguloDch.faces.push(new THREE.Face3(1,5,2));/**/
-				
-				
-				var trianguloIzq = new THREE.Geometry();
-				trianguloIzq.vertices.push(new THREE.Vertex(new THREE.Vector3(-60,120,-60)));
-				trianguloIzq.vertices.push(new THREE.Vertex(new THREE.Vector3(-60,60,60)));
-				trianguloIzq.vertices.push(new THREE.Vertex(new THREE.Vector3(-60,0,-60)));
-				trianguloIzq.vertices.push(new THREE.Vertex(new THREE.Vector3(-20,120,-60)));
-				trianguloIzq.vertices.push(new THREE.Vertex(new THREE.Vector3(-20,60,60)));
-				trianguloIzq.vertices.push(new THREE.Vertex(new THREE.Vector3(-20,0,-60)));
-				
-				trianguloIzq.faces.push(new THREE.Face3(0,1,2));
-				trianguloIzq.faces.push(new THREE.Face3(0,3,2));
-				trianguloIzq.faces.push(new THREE.Face3(3,5,2));trianguloIzq.faces.push(new THREE.Face3(3,4,1));
-				trianguloIzq.faces.push(new THREE.Face3(3,0,1));trianguloIzq.faces.push(new THREE.Face3(4,5,2));
-				trianguloIzq.faces.push(new THREE.Face3(1,5,2));
-				/**/
-				
-				trianguloDch.computeCentroids();
-				trianguloDch.computeFaceNormals();
-				trianguloIzq.computeCentroids();
-				trianguloIzq.computeFaceNormals();
-				var cube = new THREE.Mesh(geometry, material);
-				var form2 = new THREE.Mesh(trianguloDch,material);
-				form2.doubleSided = true;
-				form2.overdraw = true;
-				var form3 = new THREE.Mesh(trianguloIzq,material);
-				
-				cube.position.x = 00;
-				cube.position.y = 60;
-				cube.position.z = 0;
-				scene.add(cube);
-				scene.add(form2);
-				scene.add(form3);
 				
 				// Lights
 
-				var ambientLight = new THREE.AmbientLight( 0x111144	 );
-				scene.add( ambientLight );
+				
 
 				
-				var directionalLight = new THREE.DirectionalLight( 0xffffDD );
-				directionalLight.position.x = -200;
-				directionalLight.position.y = 400;
-				directionalLight.position.z = 200;
+				var directionalLight = new THREE.DirectionalLight( 0xFF0000 );
+				directionalLight.position.x = 0;
+				directionalLight.position.y = 1;
+				directionalLight.position.z = 0;
 				directionalLight.position.normalize();
-				scene.add( directionalLight );
 
+				
+				var directionalLight2 = new THREE.DirectionalLight( 0xFF0000 );
+				directionalLight2.position.x = 0;
+				directionalLight2.position.y = -1;
+				directionalLight2.position.z = 0;
+				directionalLight2.position.normalize();
+				
+				var directionalLight3 = new THREE.DirectionalLight( 0x00FF00 );
+				directionalLight3.position.x = 0;
+				directionalLight3.position.y = 0;
+				directionalLight3.position.z = -1;
+				directionalLight3.position.normalize();
+				
+				var directionalLight4 = new THREE.DirectionalLight( 0x00FF00 );
+				directionalLight4.position.x = 0;
+				directionalLight4.position.y = 0;
+				directionalLight4.position.z = 1;
+				directionalLight4.position.normalize();
+				
+				var directionalLight5 = new THREE.DirectionalLight( 0x0000FF );
+				directionalLight5.position.x = -1;
+				directionalLight5.position.y = 0;
+				directionalLight5.position.z = 0;
+				directionalLight5.position.normalize();
+				
+				var directionalLight6 = new THREE.DirectionalLight( 0x0000FF );
+				directionalLight6.position.x = 1;
+				directionalLight6.position.y = 0;
+				directionalLight6.position.z = 0;
+				directionalLight6.position.normalize();
+				
+				scene.add( directionalLight );
+				scene.add( directionalLight2 );
+				scene.add( directionalLight3 );
+				scene.add( directionalLight4 );
+				scene.add( directionalLight5 );
+				scene.add( directionalLight6 );
+				
 				renderer = new THREE.CanvasRenderer();
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
