@@ -192,7 +192,6 @@
 			};
 			
 			function onWindowResize() {
-
 				camera.left = window.innerWidth / - 2;
 				camera.right = window.innerWidth / 2;
 				camera.top = window.innerHeight / 2;
@@ -201,24 +200,19 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				//controls.handleResize();
 				render();
-
 			}
 
 			//
 
 			function animate() {
-
 				requestAnimationFrame( animate );
 				controls.update();
 
 				render();
-
 			}
 
 			function render() {
-
 				renderer.render( scene, camera );
-
 			}
 
 		</script>

@@ -2,22 +2,22 @@ var mOdeViewer;
 
 function odeViewer(){
 	var pThis = this;
-	this.parentDiv = "";
-	this.pieceSelectionPanel = $("<div id='OVpieceSelect'></div>");
-	this.viewSelectionPanel = $("<div id='OVviewSelect'></div>");
-	this.viewPanel = $("<canvas id='OVview'></canvas>")
+	this.parentDiv = "";// = $("#viewerContainer");
+	this.pieceSelectionPanel = "";// = $("#OVpieceSelect");
+	this.viewSelectionPanel = "";// = $("#OVviewSelect");
+	this.viewPanel= "";// = $("#OVview")
 	this.currentPiece = 0;
 	this.currentView = 0;
 	this.pieceData = new Array();
 	
-	this.start = function(pParentDiv){
-		this.parentDiv = pParentDiv;
-		this.parentDiv.html("");
+	this.start = function(){
+		this.parentDiv = $("#viewerContainer");
+		this.pieceSelectionPanel = $("#OVpieceSelect");
+		this.pieceSelectionPanel.html("HELLO");
+		this.viewSelectionPanel = $("#OVviewSelect");
+		this.viewPanel = $("#OVview")
 		this.populatePieceSelectionPanel();
 		this.populateViewSelectionPanel();
-		this.parentDiv.append(this.pieceSelectionPanel);
-		this.parentDiv.append(this.viewPanel);
-		this.parentDiv.append(this.viewSelectionPanel);
 		this.restart3DView();
 	}
 	
@@ -25,9 +25,9 @@ function odeViewer(){
 		this.pieceData.push(piece);
 	};
 	
-	this.emptyPieces = function(){
+	/*this.emptyPieces = function(){
 		this.pieceData = new Array();
-	};
+	};^*/
 	
 	this.populatePieceSelectionPanel = function(){
 		this.pieceSelectionPanel.html("");
@@ -53,24 +53,28 @@ function odeViewer(){
 	
 	this.populateViewSelectionPanel= function(){
 		this.viewSelectionPanel.html("");
-		this.viewSelectionPanel.append("Pulsa las teclas del 1 al 4 para elegir vista. Rota la vista libremente con el ratón");
+		this.viewSelectionPanel.append($("<button class='viewSelect' onclick='switchToIsoView()' > Isometrikoa</button>"));
+		this.viewSelectionPanel.append($("<button class='viewSelect' onclick='switchToYView(true)' >Oinplanoa</button>"));
+		this.viewSelectionPanel.append($("<button class='viewSelect' onclick='switchToXView(true)' >Altzaera</button>"));
+		this.viewSelectionPanel.append($("<button class='viewSelect' onclick='switchToZView(true)' >Eskuineko profila</button>"));
+		this.viewSelectionPanel.append($("<button class='viewSelect' onclick='switchToZView(false)' >Eskumako profila</button>"));
 	};
 	
 	this.changeCurPiece = function(id){
 		this.currentPiece = id;
 		
 		this.populatePieceSelectionPanel();
-		
+		changeObject(this.pieceData[this.currentPiece].colladaXml)
 	};
 	
 	this.restart3DView = function(){
-		mRenderManager.loadPiece(this.pieceData[this.currentPiece].colladaXml);
+		//mRenderManager.loadPiece(this.pieceData[this.currentPiece].colladaXml);
 	};
 };
 
 mOdeViewer = new odeViewer();
 
-function startOdeViewer(container){
+function startOdeViewer(){
 	
-	mOdeViewer.start(container);
+	mOdeViewer.start();
 };
