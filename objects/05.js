@@ -1,6 +1,6 @@
 var tPieceData = {
 colladaXml : 'objects/05.dae',
-previewImg : 'img/Figure_8_knot.png'
+previewImg : 'img/05.png'
 };
 
 

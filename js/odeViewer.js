@@ -31,8 +31,10 @@ function odeViewer(){
 	
 	this.populatePieceSelectionPanel = function(){
 		this.pieceSelectionPanel.html("");
-		this.pieceSelectionPanel.append($("<button class='leftArrow' onclick='mOdeViewer.changeCurPiece(-1)'> <</button>"));
-		this.pieceSelectionPanel.append($("<button class='rightArrow' onclick='mOdeViewer.changeCurPiece(+1)'>> </button>"));
+		this.pieceSelectionPanel.append($("<button class='leftArrow' onclick='mOdeViewer.changeCurPiece("
+		+ (this.currentPiece-1+this.pieceData.length)%this.pieceData.length + ")'> <</button>"));
+		this.pieceSelectionPanel.append($("<button class='rightArrow' onclick='mOdeViewer.changeCurPiece("
+		+ (this.currentPiece+1+this.pieceData.length)%this.pieceData.length +")'>> </button>"));
 		for (var i = -2; i<3 ; i++){
 		var boxArray = Array();
 			var myData = (this.pieceData.length+this.currentPiece+i) % this.pieceData.length ;

@@ -1,6 +1,6 @@
 var tPieceData = {
 colladaXml : 'objects/09.dae',
-previewImg : 'img/Figure_8_knot.png'
+previewImg : 'img/09.png'
 };
 
 mOdeViewer.addPiece(tPieceData);
