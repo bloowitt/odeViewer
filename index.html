@@ -33,11 +33,18 @@
 <script type="text/javascript">
 var container, camera, controls, scene, renderer, objects, dae;
 var animating=false;
-var loader = new THREE.ColladaLoader();
-loader.options.convertUpAxis = true;
+var loader;
+
+
 
 function changeObject(fileUrl){
-	delete dae;
+	loader = new THREE.ColladaLoader();
+	if (typeof(scene) !== 'undefined'){
+		scene.remove(dae);
+	}
+	if ( typeof(renderer) !== 'undefined'){
+		renderer.clear();
+	}
 	loader.options.convertUpAxis = true;
 	loader.load(fileUrl,
 	function ( collada ) {
@@ -65,7 +72,6 @@ function init() {
 	if (typeof(scene) === 'undefined'){
 		scene = new THREE.Scene();
 	}
-	
 	
 	renderer.setSize( container.width(), container.height() );
 	container.append( renderer.domElement );
@@ -95,6 +101,9 @@ function init() {
 	line.type = THREE.LinePieces;
 	scene.add( line );
 	////// OBJECT
+	
+	
+	// This position should come from an object definition in objectData, but no time for it now. 
 	dae.position.x=-0.80;
 	dae.position.y=0;
 	dae.position.z=1.10;
